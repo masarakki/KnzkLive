@@ -46,3 +46,8 @@ function dispSecDate($sec) {
 
   return $text;
 }
+
+function generateHash($retry = 0) {
+  $hash = bin2hex(openssl_random_pseudo_bytes(32, $is_secure));
+  return $is_secure || $retry > 5 ? $hash : generateHash($retry + 1);
+}

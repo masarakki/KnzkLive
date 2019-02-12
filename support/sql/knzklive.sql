@@ -252,6 +252,44 @@ UPDATE `users` SET broadcaster_id = null WHERE broadcaster_id = '0';
 create unique index users_broadcaster_id_uindex
   on users (broadcaster_id);
 
+-- 2019-02-09
+create table media
+(
+  id bigint(255) auto_increment,
+  file_path varchar(255) not null,
+  content_type varchar(100) not null,
+  file_size int(255) not null,
+  created_by int(255) not null,
+  ip varchar(255) not null,
+  obj_type varchar(100) null,
+  obj_id int(255) null,
+  primary key(id)
+);
+
+create unique index media_file_path_uindex
+  on media (file_path);
+
+create unique index media_id_uindex
+  on media (id);
+
+create table prop_sound
+(
+  id bigint(255) auto_increment,
+  file_id bigint(255) not null,
+  user_id bigint(255) not null,
+  sound_name varchar(100) not null,
+  point int(255) not null,
+  created_at timestamp default current_timestamp() not null,
+  primary key(id)
+);
+
+create unique index prop_sound_id_uindex
+  on prop_sound (id);
+
+create index prop_sound_user_id_index
+  on prop_sound (user_id);
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
